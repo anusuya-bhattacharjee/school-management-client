@@ -1,28 +1,44 @@
-import { format } from 'date-fns/esm';
-import React from 'react';
-import { DayPicker } from 'react-day-picker';
-import styles from 'react-day-picker/dist/style.css';
+import { format } from "date-fns/esm";
+import React from "react";
+import { DayPicker } from "react-day-picker";
+import "react-day-picker/dist/style.css";
+import DatePicker from "react-multi-date-picker";
+// import { Calendar } from "react-multi-date-picker";
 
-const Calendar = ({date, setDate}) => {
-    return (
-        <div class="hero min-h-screen">
-        <div className="hero-content flex-col lg:flex-row-reverse">
-        <img src="https://www.collinsdictionary.com/images/full/school_309241295.jpg" class="max-w-sm rounded-lg shadow-2xl ml-6" alt=""/>
+const Calendar = ({ date, setDate }) => {
+  return (
+    <div class="hero min-h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+      <div className="hero-content flex-col lg:flex-row-reverse">
+        <img
+          src="https://www.collinsdictionary.com/images/full/school_309241295.jpg"
+          class="max-w-sm rounded-lg shadow-2xl ml-6"
+          alt=""
+        />
         <div>
-        <style>{`.custom-head { color: red }`}</style>
-        <DayPicker 
-          styles={{
-        caption: { color: 'orange' }
-      }}
-              mode="single"
-              selected={date}
-              onSelect={setDate}
+          <DayPicker
+            styles={{
+              caption: { color: "White" },
+            }}
+            mode="single"
+            selected={date}
+            onSelect={setDate}
           />
-          <p>You have selected: {format(date, 'PP')}</p>
+
+          <p className="text-white">You have selected: {format(date, "PP")}</p>
         </div>
-          </div>
-          </div>
-    );
+        <DatePicker
+          mapDays={({ date }) => {
+            let props = {};
+            let isWeekend = [0, 6].includes(date.weekDay.index);
+
+            if (isWeekend) props.className = "highlight highlight-red";
+
+            return props;
+          }}
+        />
+      </div>
+    </div>
+  );
 };
 
 export default Calendar;
