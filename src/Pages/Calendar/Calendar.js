@@ -7,11 +7,11 @@ import DatePicker from "react-multi-date-picker";
 
 const Calendar = ({ date, setDate }) => {
   return (
-    <div class="hero min-h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+    <div className="hero min-h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
       <div className="hero-content flex-col lg:flex-row-reverse">
         <img
           src="https://www.collinsdictionary.com/images/full/school_309241295.jpg"
-          class="max-w-sm rounded-lg shadow-2xl ml-6"
+          className="max-w-sm rounded-lg shadow-2xl ml-6"
           alt=""
         />
         <div>
