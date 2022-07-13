@@ -1,6 +1,13 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const AllProfile = (props) => {
+  const navigate = useNavigate();
+
+  const navigateToProfileupdate = (id) => {
+    navigate(`/profile/${id}`);
+  };
+
   const {
     email_address,
     address,
@@ -22,9 +29,8 @@ const AllProfile = (props) => {
             <td>{pincode}</td>
             <td>{phone}</td>
             <td>{studentId}</td>
-           
           </tr>
-          <button class="btn btn-sm">Update</button>
+          <button class="btn btn-sm" onClick={()=> navigateToProfileupdate(_id)}>Update</button>
         </tbody>
         
   );
