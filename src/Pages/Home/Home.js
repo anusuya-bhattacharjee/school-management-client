@@ -7,7 +7,7 @@ const Home = () => {
     return (
         <div>
          <Calendars></Calendars>
-         {/* <Footer></Footer> */}
+         <Footer></Footer>
         </div>
     );
 };

@@ -13,7 +13,7 @@ const Profile = () => {
     fetch(`http://localhost:5000/studentDetails/${student && student.email}`)
       .then((res) => res.json())
       .then((data) => setStudentDetails(data));
-  }, []);
+  }, [student]);
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
@@ -24,6 +24,7 @@ const Profile = () => {
     const phone = event.target.phone.value;
     const studentId = event.target.studentId.value;
     const pincode = event.target.pincode.value;
+    // const image = event.target.image.value;
 
     const Student = {
       studentId,
@@ -32,7 +33,8 @@ const Profile = () => {
       email_address,
       address,
       pincode,
-      phone
+      phone,
+    //   image,
     };
 
     fetch("http://localhost:5000/addStudentDetails", {
@@ -48,9 +50,13 @@ const Profile = () => {
   };
 
   return (
-    <div className="flex justify-center mt-10">
-      <form class="w-full max-w-lg" onSubmit={handleFormSubmit}>
-        <div class="flex flex-wrap -mx-3 mb-6">
+    <div className="flex justify-center bg-gradient-to-r from-indigo-400 via-purple-500 to-pink-400">
+      <form
+        class="w-full max-w-lg"
+        onSubmit={handleFormSubmit}
+        enctype="multipart/form-data"
+      >
+        <div class="flex flex-wrap -mx-3 mb-6 mt-16">
           <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label
               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -115,7 +121,7 @@ const Profile = () => {
               id="grid-password"
               name="email_address"
               type="email"
-              value={student && student.email}
+              defaultValue={student && student.email}
             />
           </div>
 
@@ -147,10 +153,12 @@ const Profile = () => {
               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               aria-describedby="file_input_help"
               id="file_input"
+              name="image"
+              defaultValue={studentDetails.image}
               type="file"
             />
             <p
-              class="mt-1 text-sm text-gray-500 dark:text-gray-300"
+              class="mt-1 text-sm text-gray-900 dark:text-gray-300"
               id="file_input_help"
             >
               SVG, PNG, JPG or GIF (MAX. 800x400px).

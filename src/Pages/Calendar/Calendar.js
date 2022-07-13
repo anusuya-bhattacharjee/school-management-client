@@ -7,7 +7,7 @@ import DatePicker from "react-multi-date-picker";
 
 const Calendar = ({ date, setDate }) => {
   return (
-    <div className="hero min-h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+    <div className="hero min-h-screen bg-gradient-to-r from-indigo-400 via-purple-500 to-pink-400">
       <div className="hero-content flex-col lg:flex-row-reverse">
         <img
           src="https://www.collinsdictionary.com/images/full/school_309241295.jpg"
@@ -26,7 +26,7 @@ const Calendar = ({ date, setDate }) => {
 
           <p className="text-white">You have selected: {format(date, "PP")}</p>
         </div>
-        <DatePicker
+        {/* <DatePicker
           mapDays={({ date }) => {
             let props = {};
             let isWeekend = [0, 6].includes(date.weekDay.index);
@@ -35,7 +35,7 @@ const Calendar = ({ date, setDate }) => {
 
             return props;
           }}
-        />
+        /> */}
       </div>
     </div>
   );

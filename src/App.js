@@ -6,10 +6,11 @@ import Navbar from './Pages/Navbar/Navbar';
 import Login from './Pages/Login/Login';
 import ForgotPassword from './Pages/Login/ForgotPassword';
 import Profile from './Pages/Profile/Profile';
+import AllProfiles from './Pages/AllProfile/AllProfiles';
 
 function App() {
   return (
-    <div className="px-12">
+    <div className="bg-gradient-to-r from-indigo-500 via-purple-400 to-pink-500">
      <Navbar></Navbar>
         <Routes >
           <Route path="/" element={<Home></Home>}></Route>
@@ -17,6 +18,7 @@ function App() {
           <Route path="/login" element={<Login></Login>}></Route>
           <Route path="/forgot" element={<ForgotPassword></ForgotPassword>}></Route>
           <Route path="/profile" element={<Profile></Profile>}></Route>
+          <Route path="/allProfile" element={<AllProfiles></AllProfiles>}></Route>
         </Routes>
     </div>
   );

@@ -28,14 +28,15 @@ const Signup = () => {
   const [token] = useToken(user || gUser);
 
   const navigate = useNavigate();
+  
+  if (token) {
+    navigate('/');
+  }
 
   if (loading || gLoading || updating) {
     return <Loading></Loading>;
   }
 
-  if (token) {
-    navigate('/');
-  }
   
   let signInError;
 
