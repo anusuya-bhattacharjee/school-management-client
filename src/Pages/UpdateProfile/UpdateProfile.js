@@ -11,7 +11,7 @@ const UpdateProfile = () => {
     fetch(`http://localhost:5000/student/${id}`)
       .then((res) => res.json())
       .then((data) => setStudent(data));
-  }, []);
+  }, [id]);
 
   const handleFormSubmit = (event) => {
     event.preventDefault();

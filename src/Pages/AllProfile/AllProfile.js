@@ -29,8 +29,9 @@ const AllProfile = (props) => {
             <td>{pincode}</td>
             <td>{phone}</td>
             <td>{studentId}</td>
+            <td><button class="btn btn-sm" onClick={()=> navigateToProfileupdate(_id)}>Update</button></td>
+
           </tr>
-          <button class="btn btn-sm" onClick={()=> navigateToProfileupdate(_id)}>Update</button>
         </tbody>
         
   );

@@ -8,6 +8,7 @@ import ForgotPassword from './Pages/Login/ForgotPassword';
 import Profile from './Pages/Profile/Profile';
 import AllProfiles from './Pages/AllProfile/AllProfiles';
 import UpdateProfile from './Pages/UpdateProfile/UpdateProfile';
+import ProfileData from './Pages/AllProfile/ProfileData';
 
 function App() {
   return (
@@ -19,7 +20,8 @@ function App() {
           <Route path="/login" element={<Login></Login>}></Route>
           <Route path="/forgot" element={<ForgotPassword></ForgotPassword>}></Route>
           <Route path="/profile" element={<Profile></Profile>}></Route>
-          <Route path="/allProfile" element={<AllProfiles></AllProfiles>}></Route>
+          {/* <Route path="/allProfile" element={<AllProfiles></AllProfiles>}></Route> */}
+          <Route path="/allProfile" element={<ProfileData></ProfileData>}></Route>
           <Route path="/profile/:id" element={<UpdateProfile></UpdateProfile>}></Route>
         </Routes>
     </div>
