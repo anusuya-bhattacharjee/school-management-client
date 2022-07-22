@@ -9,6 +9,7 @@ const auth = getAuth(app);
 
 const Navbar = () => {
   const [user, loading, error] = useAuthState(auth);
+  console.log(user);
   const [admin] = useAdmin(user);
   const navigate = useNavigate();
 
@@ -17,8 +18,6 @@ const Navbar = () => {
     localStorage.removeItem("accessToken");
     navigate("/");
   };
-
-  console.log(user);
 
   return (
 

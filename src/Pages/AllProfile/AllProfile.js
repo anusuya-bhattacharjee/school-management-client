@@ -16,11 +16,12 @@ const AllProfile = (props) => {
     phone,
     pincode,
     studentId,
-    _id
+    _id,
+    image
   } = props.profile;
 
   return (
-        <tbody>
+    
           <tr>
             <td>{firstName}</td>
             <td>{lastName}</td>
@@ -29,10 +30,10 @@ const AllProfile = (props) => {
             <td>{pincode}</td>
             <td>{phone}</td>
             <td>{studentId}</td>
+            <td>{image}</td>
             <td><button class="btn btn-sm" onClick={()=> navigateToProfileupdate(_id)}>Update</button></td>
-
           </tr>
-        </tbody>
+        
         
   );
 };

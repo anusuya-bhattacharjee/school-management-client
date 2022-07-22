@@ -16,6 +16,7 @@ const Profile = () => {
   }, [student]);
 
   const handleFormSubmit = (event) => {
+
     event.preventDefault();
     const firstName = event.target.firstName.value;
     const lastName = event.target.lastName.value;
@@ -24,30 +25,63 @@ const Profile = () => {
     const phone = event.target.phone.value;
     const studentId = event.target.studentId.value;
     const pincode = event.target.pincode.value;
-    // const image = event.target.image.value;
+    const image = (event.target.image.files[0]);
+    console.log(image);
 
-    const Student = {
-      studentId,
-      firstName,
-      lastName,
-      email_address,
-      address,
-      pincode,
-      phone,
-    //   image,
-    };
-
-    fetch("http://localhost:5000/addStudentDetails", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(Student),
+    const imageStorageKey = 'da56129c83455a8f5f0388053e51f12f';
+    const formData = new FormData();
+    formData.append('image', image);
+    const url = `https://api.imgbb.com/1/upload?key=${imageStorageKey}`;
+    fetch(url, {
+      method: 'POST',
+      body: formData
     })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        alert("Your Information added successfully!!");
-      });
+    .then(res => res.json())
+    .then(result => {
+      console.log('imagebb', result);
+      const image = result.data.url;
+      const Student = {
+        studentId,
+        firstName,
+        lastName,
+        email_address,
+        address,
+        pincode,
+        phone,
+        image
+      };
+      fetch("http://localhost:5000/addStudentDetails", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(Student),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          alert("Your Information added successfully!!");
+        });
+    })
   };
+
+  // const imageStorageKey = 'da56129c83455a8f5f0388053e51f12f';
+
+  // const fileSelectedHandler = event => {
+  //   const image = (event.target.files[0]);
+  //   console.log(image);
+  //   const formData = new FormData();
+  //   formData.append('image', image);
+  //   const url = `https://api.imgbb.com/1/upload?key=${imageStorageKey}`;
+  //   fetch(url, {
+  //     method: 'POST',
+  //     body: formData
+  //   })
+  //   .then(res => res.json())
+  //   .then(result => {
+  //     // const img = result.data.url;
+  //     console.log('imagebb', result);
+  //   })
+
+  // }
 
   return (
     <div className="flex justify-center bg-gradient-to-r from-indigo-400 via-purple-500 to-pink-400">
@@ -142,7 +176,7 @@ const Profile = () => {
             />
           </div>
 
-          {/* <div className="ml-3">
+         <div className="ml-3">
             <label
               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
               for="file_input"
@@ -154,16 +188,18 @@ const Profile = () => {
               aria-describedby="file_input_help"
               id="file_input"
               name="image"
-              defaultValue={studentDetails.image}
+              // onChange={fileSelectedHandler}
+              Value={studentDetails.image}
               type="file"
             />
+
             <p
               class="mt-1 text-sm text-gray-900 dark:text-gray-300"
               id="file_input_help"
             >
               SVG, PNG, JPG or GIF (MAX. 800x400px).
             </p>
-          </div> */}
+          </div> 
         </div>
         <div class="flex flex-wrap -mx-3 mb-2">
           <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
@@ -201,6 +237,9 @@ const Profile = () => {
           <input type="submit" className="btn mt-6 ml-20" value="SAVE" />
         </div>
       </form>
+      <div>
+        <img src={studentDetails.image} className="h-60 mt-28 ml-20 rounded-lg" alt="Profile Image" />
+      </div>
     </div>
   );
 };

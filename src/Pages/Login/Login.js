@@ -7,7 +7,7 @@ import app from "../../firebase.init";
 import { useForm } from "react-hook-form";
 import Loading from "../Shared/Loading";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import useToken from "../../Hooks/useToken"
+import useToken from "../../Hooks/useToken";
 
 const auth = getAuth(app);
 

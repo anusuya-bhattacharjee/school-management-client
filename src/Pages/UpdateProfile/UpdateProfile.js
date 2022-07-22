@@ -23,31 +23,46 @@ const UpdateProfile = () => {
     const studentId = event.target.studentId.value;
     const pincode = event.target.pincode.value;
 
-    const UpdatedStudentDetails = {
-      studentId,
-      firstName,
-      lastName,
-      email_address,
-      address,
-      pincode,
-      phone,
-      //   image,
-    };
+    const image = event.target.image.files[0];
 
-    fetch(`http://localhost:5000/updateStudent/${id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(UpdatedStudentDetails),
+    const imageStorageKey = "da56129c83455a8f5f0388053e51f12f";
+    const formData = new FormData();
+    formData.append("image", image);
+    const url = `https://api.imgbb.com/1/upload?key=${imageStorageKey}`;
+    fetch(url, {
+      method: "POST",
+      body: formData,
     })
       .then((res) => res.json())
-      .then((data) => setStudent(data));
-    alert("Student updated successfully");
-    navigate("/allProfile");
+      .then((result) => {
+        console.log("imagebb", result);
+        const image = result.data.url;
+        
+       const UpdatedStudentDetails = {
+         studentId,
+         firstName,
+         lastName,
+         email_address,
+         address,
+         pincode,
+         phone
+       };
+       fetch(`http://localhost:5000/updateStudent/${id}`, {
+         method: "PUT",
+         headers: { "Content-Type": "application/json" },
+         body: JSON.stringify(UpdatedStudentDetails),
+       })
+         .then((res) => res.json())
+         .then((data) => setStudent(data));
+       alert("Student updated successfully");
+       navigate("/allProfile");
+  }
+      )
+
   };
 
   return (
     <div>
-      {/* <h2 className="text-2xl text-white">Update korbo toke + {id}</h2> */}
       <div className="flex justify-center">
         <form
           class="w-full max-w-lg"
@@ -140,28 +155,29 @@ const UpdateProfile = () => {
               />
             </div>
 
-            {/* <div className="ml-3">
-            <label
-              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              for="file_input"
-            >
-              UPLOAD IMAGE
-            </label>
-            <input
-              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              aria-describedby="file_input_help"
-              id="file_input"
-              name="image"
-              defaultValue={studentDetails.image}
-              type="file"
-            />
-            <p
-              class="mt-1 text-sm text-gray-900 dark:text-gray-300"
-              id="file_input_help"
-            >
-              SVG, PNG, JPG or GIF (MAX. 800x400px).
-            </p>
-          </div> */}
+            <div className="ml-3">
+              <label
+                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                for="file_input"
+              >
+                UPLOAD IMAGE
+              </label>
+              <input
+                class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                aria-describedby="file_input_help"
+                id="file_input"
+                name="image"
+                value={student.image}
+                type="file"
+              /> 
+               <p
+                class="mt-1 text-sm text-gray-900 dark:text-gray-300"
+                id="file_input_help"
+              >
+                SVG, PNG, JPG or GIF (MAX. 800x400px).
+              </p> 
+             </div> 
+
           </div>
           <div class="flex flex-wrap -mx-3 mb-2">
             <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
@@ -199,6 +215,9 @@ const UpdateProfile = () => {
             <input type="submit" className="btn mt-6 ml-20" value="SAVE" />
           </div>
         </form>
+        <div>
+        <img src={student.image} className="h-60 mt-28 ml-20 rounded-lg" alt="Profile Image" />
+      </div>
       </div>
     </div>
   );
