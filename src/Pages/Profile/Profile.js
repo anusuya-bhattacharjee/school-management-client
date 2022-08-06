@@ -31,6 +31,7 @@ const Profile = () => {
     const imageStorageKey = 'da56129c83455a8f5f0388053e51f12f';
     const formData = new FormData();
     formData.append('image', image);
+    formData.append('name', studentId);
     const url = `https://api.imgbb.com/1/upload?key=${imageStorageKey}`;
     fetch(url, {
       method: 'POST',
@@ -188,7 +189,6 @@ const Profile = () => {
               aria-describedby="file_input_help"
               id="file_input"
               name="image"
-              // onChange={fileSelectedHandler}
               Value={studentDetails.image}
               type="file"
             />

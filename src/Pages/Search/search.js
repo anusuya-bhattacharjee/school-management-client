@@ -13,15 +13,20 @@ const Search = () => {
 
   const useSuggestedProfiles = (event) => {
     event.preventDefault();
+    fetch("http://localhost:5000/allProfiles")
+    .then((res) => res.json())
+    .then((data) => {
     const ID = event.target.id.value;
     let matches = [];
     if (ID.length > 0) {
-      matches = profiles.filter((profile) => {
+      matches = data.filter((profile) => {
         return profile.studentId.includes(ID);
       });
     }
     setProfiles(matches);
     event.target.reset();
+  }
+    );
   };
 
   return (
@@ -90,6 +95,7 @@ const Search = () => {
                     <th>StudentID</th>
                     <th>Photo</th>
                     <th>Update</th>
+                    <th>Download</th>
                   </tr>
                 </thead>
                 <tbody>
